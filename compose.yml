@@ -1,0 +1,5 @@
+services:
+  python:
+      image: raja4123/py-laptops:latest
+      ports:
+        - "80:5000"
