@@ -1,32 +1,32 @@
-from flask import Flask, render_template_string, request, redirect, url_for
+from flask import Flask, render_template_string, redirect, url_for
 
 app = Flask(__name__)
 
-# Product catalog with images
-products = [
+# Unique Experience Catalog
+experiences = [
     {
         "id": 1,
-        "name": "Laptop",
-        "price": 70000,
-        "image": "https://images.unsplash.com/photo-1517336714731-489689fd1ca8"
+        "name": "Zero Gravity Experience",
+        "price": 150000,
+        "image": "https://images.unsplash.com/photo-1446776811953-b23d57bd21aa"
     },
     {
         "id": 2,
-        "name": "Mobile Phone",
-        "price": 30000,
-        "image": "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9"
+        "name": "Volcano Edge Camping",
+        "price": 95000,
+        "image": "https://images.unsplash.com/photo-1501785888041-af3ef285b470"
     },
     {
         "id": 3,
-        "name": "Headphones",
-        "price": 4000,
-        "image": "https://images.unsplash.com/photo-1518441902117-f9b88d5b7d8a"
+        "name": "AI Dream Simulation",
+        "price": 50000,
+        "image": "https://images.unsplash.com/photo-1504384308090-c894fdcc538d"
     },
     {
         "id": 4,
-        "name": "Smart Watch",
-        "price": 12000,
-        "image": "https://images.unsplash.com/photo-1523275335684-37898b6baf30"
+        "name": "Underwater Meditation",
+        "price": 80000,
+        "image": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e"
     }
 ]
 
@@ -36,124 +36,128 @@ HTML = """
 <!DOCTYPE html>
 <html>
 <head>
-    <title>DevOps Shop</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: linear-gradient(to right, #141e30, #243b55);
-            margin: 0;
-            padding: 0;
-            color: #333;
-        }
-        .navbar {
-            background: #111;
-            padding: 15px;
-            color: white;
-            text-align: center;
-            font-size: 22px;
-            letter-spacing: 1px;
-        }
-        .container {
-            width: 90%;
-            margin: 30px auto;
-        }
-        .products {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-        }
-        .product {
-            background: white;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-            transition: transform 0.2s;
-        }
-        .product:hover {
-            transform: scale(1.03);
-        }
-        .product img {
-            width: 100%;
-            height: 180px;
-            object-fit: cover;
-        }
-        .product-details {
-            padding: 15px;
-        }
-        .price {
-            color: #28a745;
-            font-weight: bold;
-            margin: 8px 0;
-        }
-        button {
-            width: 100%;
-            padding: 10px;
-            background: #28a745;
-            border: none;
-            color: white;
-            font-size: 15px;
-            cursor: pointer;
-            border-radius: 4px;
-        }
-        button:hover {
-            background: #218838;
-        }
-        .cart {
-            background: white;
-            padding: 20px;
-            margin-top: 40px;
-            border-radius: 8px;
-        }
-        .cart h2 {
-            margin-top: 0;
-        }
-        .cart-item {
-            border-bottom: 1px solid #ddd;
-            padding: 8px 0;
-        }
-        .total {
-            font-size: 18px;
-            font-weight: bold;
-            margin-top: 10px;
-        }
-    </style>
+<title>CosmicX - Beyond Reality</title>
+<style>
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+    color: white;
+}
+
+.navbar {
+    padding: 20px;
+    text-align: center;
+    font-size: 26px;
+    font-weight: bold;
+    background: rgba(0,0,0,0.6);
+    letter-spacing: 2px;
+}
+
+.container {
+    width: 90%;
+    margin: 40px auto;
+}
+
+.cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
+}
+
+.card {
+    background: rgba(255,255,255,0.08);
+    border-radius: 12px;
+    overflow: hidden;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+    transition: 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-8px);
+}
+
+.card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.details {
+    padding: 20px;
+}
+
+.price {
+    color: #00ffcc;
+    font-weight: bold;
+    margin: 10px 0;
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 6px;
+    background: linear-gradient(to right, #00c6ff, #0072ff);
+    color: white;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+button:hover {
+    opacity: 0.85;
+}
+
+.cart {
+    margin-top: 50px;
+    background: rgba(255,255,255,0.08);
+    padding: 25px;
+    border-radius: 12px;
+}
+
+.total {
+    font-size: 18px;
+    font-weight: bold;
+    margin-top: 10px;
+    color: #00ffcc;
+}
+</style>
 </head>
 <body>
 
 <div class="navbar">
-    🛒 DevOps Online Shopping Platform
+🌌 CosmicX – Book Beyond Reality
 </div>
 
 <div class="container">
 
-    <div class="products">
-        {% for p in products %}
-        <div class="product">
-            <img src="{{ p.image }}" alt="{{ p.name }}">
-            <div class="product-details">
-                <h3>{{ p.name }}</h3>
-                <div class="price">₹{{ p.price }}</div>
-                <form method="post" action="/add/{{ p.id }}">
-                    <button>Add to Cart</button>
-                </form>
-            </div>
-        </div>
-        {% endfor %}
+<div class="cards">
+{% for e in experiences %}
+<div class="card">
+    <img src="{{ e.image }}">
+    <div class="details">
+        <h3>{{ e.name }}</h3>
+        <div class="price">₹{{ e.price }}</div>
+        <form method="post" action="/add/{{ e.id }}">
+            <button>Reserve Experience</button>
+        </form>
     </div>
+</div>
+{% endfor %}
+</div>
 
-    <div class="cart">
-        <h2>🧾 Cart Summary</h2>
-        {% if cart %}
-            {% for c in cart %}
-            <div class="cart-item">
-                {{ c.name }} - ₹{{ c.price }}
-            </div>
-            {% endfor %}
-            <div class="total">Total: ₹{{ total }}</div>
-        {% else %}
-            <p>Your cart is empty</p>
-        {% endif %}
-    </div>
+<div class="cart">
+<h2>🚀 Your Bookings</h2>
+{% if cart %}
+    {% for c in cart %}
+        <div>{{ c.name }} - ₹{{ c.price }}</div>
+    {% endfor %}
+    <div class="total">Total: ₹{{ total }}</div>
+{% else %}
+    <p>No experiences selected yet.</p>
+{% endif %}
+</div>
 
 </div>
 
@@ -164,13 +168,13 @@ HTML = """
 @app.route("/")
 def home():
     total = sum(item["price"] for item in cart)
-    return render_template_string(HTML, products=products, cart=cart, total=total)
+    return render_template_string(HTML, experiences=experiences, cart=cart, total=total)
 
-@app.route("/add/<int:pid>", methods=["POST"])
-def add_to_cart(pid):
-    for p in products:
-        if p["id"] == pid:
-            cart.append(p)
+@app.route("/add/<int:eid>", methods=["POST"])
+def add_to_cart(eid):
+    for e in experiences:
+        if e["id"] == eid:
+            cart.append(e)
             break
     return redirect(url_for("home"))
 
